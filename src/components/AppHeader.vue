@@ -18,14 +18,17 @@
       :to="item.to"
       >{{ item.title }}</router-link
     >
-    <button class="mx-2" @click="$emit('openLogin')">Login</button>
-    <button class="mx-2" @click="logout">Logout</button>
+    <button v-if="isLoggedIn" class="mx-2" @click="logout">Logout</button>
+    <button v-else class="mx-2" @click="$emit('openLogin')">Login</button>
   </nav>
 </template>
 
 <script>
 import firebase from "../utilities/firebase";
 export default {
+  props: {
+    isLoggedIn: Boolean,
+  },
   data() {
     return {
       list: [
@@ -38,6 +41,7 @@ export default {
         { title: "Chat", to: "/chat" },
         { title: "User Crud", to: "/user-crud" },
         { title: "Tensorflow", to: "/tensorflow" },
+        { title: "Practice", to: "/practice" },
       ],
     };
   },

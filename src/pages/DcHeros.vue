@@ -19,7 +19,7 @@
         type="text"
         v-model="newHero"
         placeholder="Type Hero Name"
-        ref="newHero"
+        ref="newHeroInput"
       />
       <button
         class="
@@ -41,39 +41,44 @@
 </template>
 
 <script>
+import { computed, onMounted, ref } from "vue";
 export default {
-  data() {
-    return {
-      newHero: "",
-      heros: [
-        { name: "SuperGirl" },
-        { name: "Flash" },
-        { name: "Batman" },
-        { name: "Arrow" },
-        { name: "SuperMan" },
-      ],
-    };
-  },
-  mounted() {
-    this.$refs.newHero.focus();
-  },
-  methods: {
-    addHero() {
-      if (this.newHero !== "") {
-        this.heros.push({ name: this.newHero });
-        this.newHero = "";
-      }
-    },
-    removeHeros(index) {
-      this.heros = this.heros.filter((herp, i) => i !== index);
-    },
-  },
-  computed: {
-    heroLength() {
-      return this.heros.length;
-    },
+  setup() {
+    return uses();
   },
 };
+function uses() {
+  const newHeroInput = ref("");
+  const newHero = ref("");
+  const heros = ref([
+    { name: "SuperGirl" },
+    { name: "Flash" },
+    { name: "Batman" },
+    { name: "Arrow" },
+    { name: "SuperMan" },
+  ]);
+
+  onMounted(() => {
+    newHeroInput.value.focus();
+  });
+
+  function addHero() {
+    if (newHero.value !== "") {
+      heros.value.push({ name: newHero.value });
+      newHero.value = "";
+    }
+  }
+
+  function removeHeros(index) {
+    heros.value = heros.value.filter((herp, i) => i !== index);
+  }
+
+  const heroLength = computed({
+    get: () => heros.value.length,
+  });
+
+  return { newHero, heros, removeHeros, addHero, heroLength, newHeroInput };
+}
 </script>
 
 <style></style>

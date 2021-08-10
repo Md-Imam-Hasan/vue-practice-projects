@@ -4,6 +4,7 @@ import Calendar from "../pages/Calendar.vue";
 import Home from "../pages/Home.vue";
 import Markdown from "../pages/Markdown.vue";
 import Slider from "../pages/Slider.vue";
+import Practice from "../pages/Practice";
 
 const routes = [
   { path: "/", component: Home },
@@ -11,6 +12,7 @@ const routes = [
   { path: "/calendar", component: Calendar },
   { path: "/markdown", component: Markdown },
   { path: "/slider-carousel", component: Slider },
+  { path: "/practice", component: Practice },
 ];
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),

@@ -1,9 +1,11 @@
 <template>
-  <AppHeader @openLogin="isLoginOpen = true" />
+  <AppHeader :isLoggedIn="isLoggedIn" @openLogin="isLoginOpen = true" />
   <div class="w-full flex">
     <router-view />
   </div>
-  <LoginModal @openLoginModal="isLoginOpen = false" v-if="isLoginOpen" />
+  <teleport to="body">
+    <LoginModal @openLoginModal="isLoginOpen = false" v-if="isLoginOpen" />
+  </teleport>
 </template>
 
 <script>
@@ -36,4 +38,19 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+body {
+  background: #2a323a;
+}
+p,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+small {
+  color: whitesmoke;
+}
+</style>
